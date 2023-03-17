@@ -84,7 +84,11 @@ function preload() {
   function detect() {
     // instruct "detector" object to start detect object from video element
     // and "onDetected" function is called when object is detected
-    detector.detect(video, onDetected);
+    setTimeout(() => {
+      // instruct "detector" object to start detect object from video element
+      // and "onDetected" function is called when object is detected
+      detector.detect(video, onDetected);
+    }, 2000); // 2000 milliseconds = 2 second
   }
   
   // callback function. it is called when object is detected
