@@ -25,16 +25,12 @@ function preload() {
     // create canvas element with 640 width and 480 height in pixel
     // createCanvas(640, 480);
     var canvas = createCanvas(640, 480);
-    // var divElement = document.getElementById("mycanvas"); // get div element by id
-    // divElement.appendChild(canvas); // append canvas element to div element
+
     // add CSS styling to center align canvas
     canvas.style('display', 'block');
     canvas.style('margin', '90px auto 0 auto');
     canvas.style('border', '5px solid #ffffff')
-
-    // canvas.style('margin-top', '50px');
-    // Creates a new HTML5 <video> element that contains the audio/video feed from a webcam.
-    // The element is separate from the canvas and is displayed by default.
+    
     video = createCapture(VIDEO);
     video.size(640, 480);
     video.hide();
@@ -65,6 +61,8 @@ function preload() {
     if (!detecting) {
       detect();
       toggleDetectingEl.innerText = 'Stop Detecting';
+      toggleSpeakingEl.innerText = 'Mute';
+      speachEnabled = true;
     } else {
       toggleDetectingEl.innerText = 'Start Detecting';
       toggleSpeakingEl.innerText = 'Unmute';
