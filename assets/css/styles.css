@@ -1,0 +1,125 @@
+body {
+  background: #000 url("../../assets/img/background.jpg");
+  background-size: cover;
+  color: #ffffff;
+  font-family: 'Sora';
+}
+
+#cta {
+  width: 100%;
+  text-align: center;
+}
+
+.btn {
+  width: 100%;
+  background: #692BEE;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.btn {
+  background: linear-gradient(135deg, #0048B5 0%, rgba(255, 255, 255, 0) 100%), #692BEE;
+}
+
+#introduction h1 {
+  font-weight: bold;
+  font-size: 52px;
+  margin-bottom: 24px;
+  background: linear-gradient(270deg, #FFDC73 38.13%, #E447CF 72.8%, #47EEDF 114.65%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+#introduction h3 {
+  color: #D0D4F4;
+  font-weight: 200;
+}
+
+p {
+  color: #AFAFAF;
+}
+
+#hero {
+  gap: 62px;
+  padding: 32px;
+}
+
+#footer {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#footer p {
+  font-size: small;
+}
+
+.img-height {
+  height: 100vh;
+  width: 100%;
+  object-fit: contain;
+}
+
+#webcam {
+  position: absolute;
+  z-index: 1;
+  width: 90%;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, -0%);
+}
+
+#video, #defaultCanvas0 {
+  height: 90vh;
+}
+
+#overlay {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  height: 90vh;
+}
+
+#actionbar {
+  background: rgba(23, 8, 36, 0.9);
+  border-radius: 16px;
+  margin: 32px;
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  width: 94%;
+  padding: 32px;
+}
+
+#back {
+  height: 100px;
+  padding: 32px;
+}
+
+#actionbar p {
+  margin: 0;
+  color: #fff;
+}
+
+.number {
+  padding: 12px;
+  background: linear-gradient(135deg, #0048B5 0%, rgba(255, 255, 255, 0) 100%), #692BEE;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.count {
+  gap: 16px;
+}
+
+.nomargin {
+  margin: 0;
+}
+
+.pink-btn {
+  background: #EE51CB;
+}

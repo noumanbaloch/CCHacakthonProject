@@ -4,7 +4,7 @@ let detector = null; // detector object
 let detections = []; // store detection result
 let videoVisibility = true;
 let detecting = false;
-let speachEnabled = false;
+let speachEnabled = true;
 
 // global HTML element
 const toggleVideoEl = document.getElementById('toggleVideoEl');
@@ -18,25 +18,34 @@ document.body.style.cursor = 'wait';
 function preload() {
     // create detector object from "cocossd" model
     detector = ml5.objectDetector('cocossd');
-    console.log('detector object is loaded');
   }
   
   // The setup() function is called once when the program starts.
   function setup() {
     // create canvas element with 640 width and 480 height in pixel
-    createCanvas(640, 480);
+    // createCanvas(640, 480);
+    var canvas = createCanvas(640, 480);
+    // var divElement = document.getElementById("mycanvas"); // get div element by id
+    // divElement.appendChild(canvas); // append canvas element to div element
+    // add CSS styling to center align canvas
+    canvas.style('display', 'block');
+    canvas.style('margin', '90px auto 0 auto');
+    canvas.style('border', '5px solid #ffffff')
+
+    // canvas.style('margin-top', '50px');
     // Creates a new HTML5 <video> element that contains the audio/video feed from a webcam.
     // The element is separate from the canvas and is displayed by default.
     video = createCapture(VIDEO);
     video.size(640, 480);
-    console.log('video element is created');
+    video.hide();
+
     video.elt.addEventListener('loadeddata', function() {
       // set cursor back to default
       if (video.elt.readyState >= 2) {
         document.body.style.cursor = 'default';
-        console.log('video element is ready! Click "Start Detecting" to see the magic!');
       }
     });
+
   }
 
   function toggleVideo() {
@@ -58,6 +67,8 @@ function preload() {
       toggleDetectingEl.innerText = 'Stop Detecting';
     } else {
       toggleDetectingEl.innerText = 'Start Detecting';
+      toggleSpeakingEl.innerText = 'Unmute';
+      speachEnabled = false;
     }
     detecting = !detecting;
   }
@@ -65,12 +76,11 @@ function preload() {
   function toggleTextToSpeech() {
     if (!speachEnabled)
     {
-        speachEnabled = true;
-        toggleSpeakingEl.innerText = 'Text to Speech Enabled';
+        toggleSpeakingEl.innerText = 'Mute';
     } else {
-        speachEnabled = false;
-        toggleSpeakingEl.innerText = 'Text to Speech Disabled';
+        toggleSpeakingEl.innerText = 'Unmute';
     }
+    speachEnabled = !speachEnabled;
   }
 
   function detect() {
@@ -86,7 +96,7 @@ function preload() {
     }
     detections = results;
 
-    countEl.innerText = `Number of objects detected: ${detections.length}`; // update count element
+    countEl.innerText = detections.length; // update count element
     
     if(!speachEnabled && 'speechSynthesis' in window)
     {
@@ -94,11 +104,13 @@ function preload() {
     }
     
     if (speachEnabled && 'speechSynthesis' in window) {
-        debugger
-        const message = new SpeechSynthesisUtterance(`Number of objects detected: ${detections.length}`);
+      if (detections.length === 1) {
+        const message = new SpeechSynthesisUtterance(`one object is detected`);
         window.speechSynthesis.speak(message);
-    } else {
-        console.log('Sorry, speech synthesis is not supported by your browser.');
+      } else {
+        const message = new SpeechSynthesisUtterance(`${detections.length} objects are detected`);
+        window.speechSynthesis.speak(message);
+      }
     }
     
     // keep detecting object
@@ -107,17 +119,16 @@ function preload() {
     }
   }
 
-
   // the draw() function continuously executes until the noLoop() function is called
-function draw() {
-    if (!video || !detecting) return;
-    // draw video frame to canvas and place it at the top-left corner
-    image(video, 0, 0);
-    // draw all detected objects to the canvas
-    for (let i = 0; i < detections.length; i++) {
-      drawResult(detections[i]);
+  function draw() {
+      if (!video || !detecting) return;
+      // draw video frame to canvas and place it at the top-left corner
+      image(video, 0, 0);
+      // draw all detected objects to the canvas
+      for (let i = 0; i < detections.length; i++) {
+        drawResult(detections[i]);
+      }
     }
-  }
   
   function drawResult(object) {
     drawBoundingBox(object);
@@ -127,7 +138,7 @@ function draw() {
   // draw bounding box around the detected object
   function drawBoundingBox(object) {
     // Sets the color used to draw lines.
-    stroke('green');
+    stroke('EE51CB');
     // width of the stroke
     strokeWeight(4);
     // Disables filling geometry

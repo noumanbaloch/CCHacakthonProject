@@ -2,20 +2,44 @@
 <html>
 
 <head>
-  <title>TalkVision</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-  <script src="https://unpkg.com/ml5@0.7.1/dist/ml5.min.js"></script>
-  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>TalkVision</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sora:100,200,300,400,500,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.7.1/dist/ml5.min.js"></script>
+ 
+    <meta charset="utf-8" />
 </head>
 
 <body>
-  <p>
-    <button id="toggleVideoEl" onclick="toggleVideo()">Hide Video</button>
-    <button id="toggleDetectingEl" onclick="toggleDetecting()">Start Detecting</button>
-    <button id="toggleSpeakingEl" onclick="toggleTextToSpeech()">Text to Speech Disabled</button>
-    
-    <div id="countEl"></div>
-  </p>
+
+    <div class="container">
+        <div class="row d-flex flex-column flex-lg-row">
+            <div class="col align-self-center">
+                <div id="webcam">
+                    <div id="overlay">
+                        <div id="back"><a id="back-link" title="Go Back" href="index.html"><img src="assets/img/button-back.svg"></a></div>
+                        <div class="d-flex justify-content-between" id="actionbar">
+                            <div class="d-inline-flex align-items-lg-center count">
+                                <p>Objects found</p>
+                                <p class="number" id="countEl"></p>
+                            </div>
+                            <div class="d-inline-flex align-items-lg-center button">
+                                <a class="btn btn-primary btn-lg nomargin pink-btn" id="toggleDetectingEl" title="Start Detecting" onclick="toggleDetecting()">Start Detecting</a>
+                            </div>
+                            <div class="d-inline-flex align-items-lg-center button">
+                                <a class="btn btn-primary btn-lg nomargin" id="toggleSpeakingEl" onclick="toggleTextToSpeech()">Mute</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 
